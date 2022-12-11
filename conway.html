@@ -1,13 +1,27 @@
-<canvas id="game" width="800" height="800"></canvas>
+<!DOCTYPE html>
+<body margin="0" padding="0">
+  <h1>Conway's Game of Life Site Footer</h1>
+  <canvas id="game"></canvas>
+</body>
 <script>
-  // Define the dimensions of the grid
-  const width = 100;
-  const height = 100;
-  const cellSize = 5;
-
   // Get a reference to the canvas element
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = 100;
+  canvas.style.position = "fixed";
+  canvas.style.bottom = "0";
+  canvas.style.left = "0";
+
+  // Update the width of the canvas whenever the window is resized
+  window.onresize = function() {
+    canvas.width = window.innerWidth;
+  };
+
+  // Define the dimensions of the grid
+  const width = canvas.width;
+  const height = canvas.height;
+  const cellSize = 5;
 
   // Initialize the grid with random values
   let grid = new Array(height);
@@ -71,7 +85,7 @@
                 ctx.fillStyle
 
                 // Set the fill color to black
-                ctx.fillStyle = '#000000';
+                ctx.fillStyle = '#E5E4E2';
 
                 // Calculate the coordinates of the cell
                 let x = j * cellSize;
@@ -85,21 +99,22 @@
     }
   }
 
-    // This function animates the game by calling the draw function at a regular interval
-    function animate() {
-        // Update the grid
-        grid = update(grid);
+  // This function animates the game by calling the draw function at a regular interval
+  function animate() {
+      // Update the grid
+      grid = update(grid);
 
-        // Draw the grid
-        draw(grid);
+      // Draw the grid
+      draw(grid);
 
-        // Wait 100 milliseconds before printing the grid
-        setTimeout(function() {
-            // Request the next animation frame
-            requestAnimationFrame(animate);
-        }, 500);
-    }
+      // Wait 100 milliseconds before printing the grid
+      setTimeout(function() {
+          // Request the next animation frame
+          requestAnimationFrame(animate);
+      }, 500);
+  }
 
-    // Start the animation
-    requestAnimationFrame(animate);
+  // Start the animation
+  requestAnimationFrame(animate);
 </script>
+</body>
